@@ -1,0 +1,26 @@
+[
+  {
+    "id": "usr_001",
+    "name": "Budi Santoso",
+    "email": "budi.santoso@example.com",
+    "password": "Password123!",
+    "role": "investor",
+    "createdAt": "2025-01-15T08:00:00.000Z"
+  },
+  {
+    "id": "usr_002",
+    "name": "Siti Rahayu",
+    "email": "siti.rahayu@example.com",
+    "password": "Rahayu2025!",
+    "role": "analyst",
+    "createdAt": "2025-02-20T09:30:00.000Z"
+  },
+  {
+    "id": "usr_003",
+    "name": "Demo User",
+    "email": "demo@otrum.id",
+    "password": "Demo1234!",
+    "role": "investor",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  }
+]
