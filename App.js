@@ -1,28 +1,12 @@
-/**
- * App — Otrum Market Intelligence (entry point)
- *
- * Wires together:
- *  - NativeWind global CSS
- *  - SafeAreaProvider (required by react-native-safe-area-context)
- *  - useAuth hook (JSON mock store; swap with API later)
- *  - LoginScreen (the first screen in the auth flow)
- *
- * Once the full navigation stack is added (Expo Router / React Navigation),
- * this file will be replaced by the navigator root. For now it renders the
- * login screen directly, switching to a placeholder home when authenticated.
- */
-
 import './global.css';
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useAuth } from './src/auth/useAuth';
 import LoginScreen from './src/screens/LoginScreen';
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Placeholder home screen shown after successful login
-// ─────────────────────────────────────────────────────────────────────────────
+import RegisterScreen from './src/screens/RegisterScreen';
 
 function HomeScreen({ user, onLogout }) {
   return (
@@ -54,9 +38,25 @@ function HomeScreen({ user, onLogout }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Root
-// ─────────────────────────────────────────────────────────────────────────────
+function AuthFlow({ authHook }) {
+  const [screen, setScreen] = useState('login');
+
+  if (screen === 'register') {
+    return (
+      <RegisterScreen
+        authHook={authHook}
+        onNavigate={setScreen}
+      />
+    );
+  }
+
+  return (
+    <LoginScreen
+      authHook={authHook}
+      onNavigate={setScreen}
+    />
+  );
+}
 
 export default function App() {
   const authHook = useAuth();
@@ -67,7 +67,7 @@ export default function App() {
       {auth.isAuthenticated ? (
         <HomeScreen user={auth.user} onLogout={logout} />
       ) : (
-        <LoginScreen authHook={authHook} />
+        <AuthFlow authHook={authHook} />
       )}
     </SafeAreaProvider>
   );

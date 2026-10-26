@@ -34,5 +34,8 @@ yarn-error.*
 guides/
 
 Guide/
-
+doc.md
 AGENTS.md
+.agents/
+.gemini/
+Docs/
